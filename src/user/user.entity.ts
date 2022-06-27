@@ -1,4 +1,6 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Concert} from "../concert/concert.entity";
+
 
 @Entity('users')
 export class User {
@@ -17,4 +19,6 @@ export class User {
     @Column()
     password: string;
 
+    @OneToMany(()=>Concert,(concert)=>concert.user)
+    concerts: Concert[];
 }
