@@ -1,12 +1,13 @@
 import {IsNotEmpty, IsString} from "class-validator";
 
-export class CreateConcertDto {
+export class CreateContentDto {
     @IsNotEmpty()
     @IsString()
     title: string;
 
     @IsNotEmpty()
-    content_id:bigint;
+    @IsString()
+    type: string;
 
     @IsNotEmpty()
     @IsString()

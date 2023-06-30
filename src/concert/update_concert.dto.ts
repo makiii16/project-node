@@ -3,13 +3,13 @@ import {IsNumber, IsOptional, IsString} from "class-validator";
 export class UpdateConcertDto {
     @IsString()
     @IsOptional()
-    time?:Date;
+    title?:string;
 
     @IsOptional()
     @IsString()
-    time_start_?:Date;
+    content?:string;
 
     @IsOptional()
     @IsNumber()
-    end_time?:Date;
+    subject_id?:number;
 }

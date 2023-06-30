@@ -13,7 +13,5 @@ import {ConcertController} from "./concert.controller";
   controllers: [ConcertController],
   providers: [ConcertService]
 })
-export class PostModule {}
 
-export class ConcertModule {
-}
+export class ConcertModule {}

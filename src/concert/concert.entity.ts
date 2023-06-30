@@ -1,9 +1,10 @@
 import {
-    Column,
+    Column, CreateDateColumn,
     Entity, JoinColumn, ManyToOne,
-    PrimaryGeneratedColumn,
+    PrimaryGeneratedColumn, UpdateDateColumn,
 } from "typeorm";
 import {User} from "../user/user.entity";
+import {Content} from "../content/content.entity";
 
 
 @Entity('concerts')
@@ -12,15 +13,23 @@ export class Concert {
     id: number;
 
     @Column()
-    date: Date;
+    title: string;
 
     @Column()
-    start_time: Date;
+    description: string;
 
-    @Column()
-    end_time: Date;
+    @CreateDateColumn()
+    created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
+
 
     @ManyToOne(()=>User, (user) => user.concerts,{eager:true})
     @JoinColumn({name: 'user_id'})
     user: User;
+
+    @ManyToOne(()=>Content, (content) => content.concerts,{eager:true})
+    @JoinColumn({name: 'content_id'})
+    content1: Content;
 }

@@ -23,7 +23,7 @@ import {UpdateConcertDto} from "./update_concert.dto";
 
 @UseGuards(AuthGuard)
 @Controller('concert')
-export class PostController {
+export class ConcertController {
 
     constructor(
         private concertService:ConcertService,
@@ -43,10 +43,12 @@ export class PostController {
         const jwt = request.cookies['jwt'];
         const user = await this.jwtService.verifyAsync(jwt);
 
+
+        //console.log(user);
         return this.concertService.create({
-            date: data.date,
-            start_time: data.date,
-            end_time: data.date,
+            title: data.title,
+            content_id: data.content_id,
+            description: {id: data.description},
             user: {id: user.id}
         });
     }
@@ -79,7 +81,7 @@ export class PostController {
 
         const concert = await this.getOne(id);
         if (concert.user.id != user.id) {
-            throw new UnauthorizedException('Nisi lastnik!');
+            throw new UnauthorizedException('Napaka!');
         }
 
         return this.concertService.delete(id);
@@ -96,12 +98,10 @@ export class PostController {
 
         const concert = await this.getOne(id);
         if (concert.user.id != user.id) {
-            throw new UnauthorizedException('Nisi lastnik!');
+            throw new UnauthorizedException('Napaka!');
         }
 
         return this.concertService.update(id,data);
     }
 }
 
-export class ConcertController {
-}
